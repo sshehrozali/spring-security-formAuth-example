@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class Student {
-    private String studentId;
+    private Integer studentId;
     private String studentName;
 }
