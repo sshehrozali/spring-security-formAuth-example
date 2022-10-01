@@ -14,9 +14,9 @@ import java.util.List;
 @RequestMapping("api/v1")
 public class StudentController {
     private static final List<Student> students = Arrays.asList(
-            new Student("1", "Shehroz"),
-            new Student("2", "Saad"),
-            new Student("3", "Ali")
+            new Student(1, "Shehroz"),
+            new Student(2, "Saad"),
+            new Student(3, "Ali")
     );
 
     @GetMapping("/student/{studentId}")
