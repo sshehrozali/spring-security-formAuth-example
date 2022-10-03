@@ -9,3 +9,12 @@ The application currently uses this method to store multiple `UserDetails` objec
 
 * #### `BCryptPasswordEncoder`
 The application uses this method to encode plain raw password and then store the `UserDetails` in-memory as forced by Spring Security. Checkout `PasswordConfig` class to understand the usage. The `PasswordEncoder` is injected into `ApplicationSecurityConfig` class via constructor-based approach annotated with `@Autowired`. The `UserDetails.builder().password()` is passed `passwordEncoder.encode(_your-password_)` which encrypts the password and then stores it in-memory.
+
+### Roles & Permissions
+The project uses Java `enum` (check under `security` package) to define roles and permissions in the system. The system contains two roles:
+* `ADMIN`: Full-access over the system. Includes all READ, WRITE exclusive permissions.
+* `STUDENT`: Limited access. Can READ information but limited to WRITE.
+
+The diagram below represents the encapsulated version.
+
+![](misc/roles_permissions.png)
