@@ -1,10 +1,17 @@
 package com.my.app.security;
 
+import com.google.common.collect.Sets;
+
 import java.util.Set;
 
 public enum ApplicationUserRoles {
-    STUDENT(permissions),
-    ADMIN(permissions);
+    STUDENT(Sets.newHashSet()),
+    ADMIN(Sets.newHashSet(
+            ApplicationUserPermissions.STUDENT_READ,
+            ApplicationUserPermissions.STUDENT_WRITE,
+            ApplicationUserPermissions.COURSES_READ,
+            ApplicationUserPermissions.COURSES_WRITE
+    ));
 
     private final Set<ApplicationUserPermissions> permissions;
 
