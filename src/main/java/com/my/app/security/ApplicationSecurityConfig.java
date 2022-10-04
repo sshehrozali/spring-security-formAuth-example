@@ -29,8 +29,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "index", "/css/*", "/js/*")
-                .permitAll()
+                .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
+                .antMatchers("/api/v1/student/**").hasRole(STUDENT.name())
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -40,21 +40,21 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     @Bean
     protected UserDetailsService userDetailsService() {
-        UserDetails shehrozAliUser = User.builder()
+        UserDetails adminShehroz = User.builder()
                 .username("shehroz")
                 .password(passwordEncoder.encode("shehroz"))
                 .roles(ADMIN.name())
                 .build();
 
-        UserDetails aliUser = User.builder()
+        UserDetails studentAli = User.builder()
                 .username("user")
                 .password(passwordEncoder.encode("ali"))
                 .roles(STUDENT.name())
                 .build();
 
         return new InMemoryUserDetailsManager(
-                shehrozAliUser,
-                aliUser
+                adminShehroz,
+                studentAli
         );
     }
 }
