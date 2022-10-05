@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -31,6 +32,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
+                .antMatchers(HttpMethod.POST, "/management/api/v1/**").hasAuthority(ApplicationUserPermissions.COURSES_WRITE.name())
+                .antMatchers(HttpMethod.PUT, "/management/api/v1/**").hasAuthority(ApplicationUserPermissions.COURSES_WRITE.name())
+                .antMatchers(HttpMethod.DELETE, "/management/api/v1/**").hasAuthority(ApplicationUserPermissions.COURSES_WRITE.name())
+                .antMatchers(HttpMethod.GET, "/management/api/v1/**").hasAuthority(ApplicationUserPermissions.COURSES_WRITE.name())
                 .antMatchers("/api/v1/student/**").hasRole(STUDENT.name())
                 .anyRequest()
                 .authenticated()
