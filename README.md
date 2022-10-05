@@ -18,3 +18,12 @@ The project uses Java `enum` (check under `security` package) to define roles an
 The diagram below represents the encapsulated version.
 
 ![](misc/roles_permissions.png)
+
+### Authentication
+The application supports two forms of authentications:
+
+* #### ROLE based authentication
+The role based authentication works on reading specified `.role(_ROLE_)` of each `UserDetails` object in-memory. We specified each endpoint using `.antMatchers(_ENDPOINT_)` and `.hasRoles(_ROLE_)` so it blocks and forwards only those User requests which has the matching specified role. Checkout `ApplicationUserRoles` and `ApplicationUserPermissions` enums to understand more about the implementation.
+
+* #### PERMISSION based authentication
+The permission based authentication works on checking each incoming requests type and granting access on basis of specified permissions on type of request method. We have specified each `StudentManagement` API endpoint in `.antMatchers(_ENDPOINT_)` and `.hasAuthorities(_PERMISSION_)`. We have also specified `.authorities()` to each `UserDetails` object in-memory. Checkout `ApplicationUserRoles` and `ApplicationUserPermissions` enums to understand more about the implementation.
