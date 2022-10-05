@@ -28,6 +28,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
                 .antMatchers("/api/v1/student/**").hasRole(STUDENT.name())
@@ -43,19 +44,19 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         UserDetails adminShehroz = User.builder()
                 .username("shehroz")
                 .password(passwordEncoder.encode("shehroz"))
-                .roles(ADMIN.name())
+//                .roles(ADMIN.name())
                 .build();
 
         UserDetails studentAli = User.builder()
                 .username("ali")
                 .password(passwordEncoder.encode("ali"))
-                .roles(STUDENT.name())
+//                .roles(STUDENT.name())
                 .build();
 
         UserDetails adminTraineeSaad = User.builder()
                 .username("saad")
                 .password(passwordEncoder.encode("saad"))
-                .roles(ADMINTRAINEE.name())
+//                .roles(ADMINTRAINEE.name())
                 .build();
 
         return new InMemoryUserDetailsManager(
