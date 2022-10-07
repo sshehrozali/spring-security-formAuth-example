@@ -4,6 +4,12 @@ The application is designed to demonstrate the most common use of **Spring Secur
 ### BasicAuth
 The BasicAuth is the most common approach to easily introduce authentication into your system by securing your endpoints (except those who you whitelist explicitly using `.antMatchers()` and `.permitAll()`). It works by sending _username_ and _password_ in request headers using **Base64** which then server reads to match with stored username and password.
 
+#### How it works?
+![](misc/basicauth.png)
+
+#### Implementation
+For implementing HTTP BasicAuth in your Spring applications, you need to override `configure(HTTPSecurity http)` method by setting `http.` to `.httpBasic()` and implement the below methods to use HTTP BasicAuth to secure your REST endpoints. Checkout `ApplicationSecurityConfig` class under `security` package to understand more about the implementation. 
+
 * #### `InMemoryUserDetailsManager`
 The application currently uses this method to store multiple `UserDetails` objects and stores it in-memory. This means that when the system starts it is stored **in-memory** i.e. no persistence maintained over entire life-time.
 
